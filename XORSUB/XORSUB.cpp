@@ -2,9 +2,9 @@
 #include <map>
 #include <algorithm>
 using namespace std;
- 
+
 const int SIZE = 1000001;
- 
+
 int sqrt(int n) {
     auto begin = 0, end = n;
     while(begin < end) {
@@ -17,7 +17,7 @@ int sqrt(int n) {
     }
     return end;
 }
- 
+
 int main() {
     int n, q;
     cin >> n >> q;
