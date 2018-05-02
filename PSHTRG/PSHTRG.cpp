@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+ 
 vector<unsigned int> cal(unsigned int* a, unsigned int start, unsigned int end) {
     unsigned int size = end - start, b[size];
     for(unsigned int i = start; i < end; i++) {
@@ -18,7 +18,7 @@ vector<unsigned int> cal(unsigned int* a, unsigned int start, unsigned int end) 
     }
     return vector<unsigned int> (b + index, b + size);
 }
-
+ 
 unsigned int sqrt(unsigned int n) {
     unsigned int begin = 0, end = n;
     while(begin < end) {
@@ -31,18 +31,11 @@ unsigned int sqrt(unsigned int n) {
     }
     return end;
 }
-
-unsigned int ceiling(unsigned int a, unsigned int b) {
-    if(a == 0) {
-        return 0;
-    }
-    return (a - 1) / b + 1;
-}
  
 int main() {
     unsigned int n, q;
     cin >> n >> q;
-    unsigned int a[n], blocksize = sqrt(n), blocknum = ceiling(n, blocksize);
+    unsigned int a[n], blocksize = sqrt(n), blocknum = (n - 1) / blocksize + 1;
     vector<unsigned int> block[blocknum];
     for(unsigned int i = 0; i < n; i++) {
         cin >> a[i];
@@ -51,31 +44,27 @@ int main() {
         block[i] = cal(a, i * blocksize, min((i + 1) * blocksize, n));
     }
     for(unsigned int m, b, c; cin >> m >> b >> c; ) {
+        b--;
         switch(m) {
             case 1:
-                b--;
                 a[b] = c;
                 b = b / blocksize;
                 block[b] = cal(a, b * blocksize, min((b + 1) * blocksize, n));
                 break;
             case 2:
-                b--;
-                c--;
-                unsigned int start = ceiling(b, blocksize);
-                unsigned int end = c / blocksize;
+                unsigned int result = 0, start = b / blocksize + 1, end = (c - 1) / blocksize;
                 vector<unsigned int> v;
                 if(end <= start) {
-                    v = cal(a, b, c + 1);
+                    v = cal(a, b, c);
                 } else {
                     v = cal(a, b, start * blocksize);
                     for(unsigned int i = start; i < end; i++) {
                         v.insert(v.end(), block[i].begin(), block[i].end());
                     }
-                    auto t = cal(a, end * blocksize, c + 1);
+                    auto t = cal(a, end * blocksize, c);
                     v.insert(v.end(), t.begin(), t.end());
                 }
                 sort(v.begin(), v.end());
-                unsigned int result = 0;
                 for(unsigned int i = v.size() - 1; i >= 2; i--) {
                     if(v[i] < v[i - 1] + v[i - 2]) {
                         result = v[i] + v[i - 1] + v[i - 2];
