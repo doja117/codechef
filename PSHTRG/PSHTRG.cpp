@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
- 
+
 vector<unsigned int> cal(unsigned int* a, unsigned int start, unsigned int end) {
     unsigned int size = end - start, b[size];
     for(unsigned int i = start; i < end; i++) {
@@ -18,7 +18,7 @@ vector<unsigned int> cal(unsigned int* a, unsigned int start, unsigned int end) 
     }
     return vector<unsigned int> (b + index, b + size);
 }
- 
+
 unsigned int sqrt(unsigned int n) {
     unsigned int begin = 0, end = n;
     while(begin < end) {
