@@ -1,70 +1,37 @@
 #include <iostream>
-#include <map>
-#include <algorithm>
+#include <vector>
 using namespace std;
 
-const int SIZE = 1000001;
-
-int sqrt(int n) {
-    auto begin = 0, end = n;
-    while(begin < end) {
-        auto mid = (end + begin + 1) / 2;
-        if(mid <= n / mid) {
-            begin = mid;
-        } else {
-            end = mid - 1;
-        }
+int length(int n) {
+    int result = 0;
+    while(n > 0) {
+        result++;
+        n /= 2;
     }
-    return end;
+    return result;
 }
 
 int main() {
-    int n, q;
-    cin >> n >> q;
-    int a[n], blocksize = sqrt(n), blockcount = (n - 1) / blocksize + 1, xorr[blockcount];
-    for(int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-    int block[blockcount][SIZE];
-    for(int i = 0; i < blockcount; i++) {
-        xorr[i] = 0;
-        fill(block[i], block[i] + SIZE, 0);
-        for(int j = i * blocksize; j < min(n, (i + 1) * blocksize); j++) {
-            xorr[i] ^= a[j];
-            block[i][xorr[i]]++;
+    int T;
+    cin >> T;
+    for(int N, K; cin >> N >> K; ) {
+        vector<int> bucket[32];
+        for(int i = 0; i < N; i++) {
+            int A;
+            cin >> A;
+            bucket[length(A)].emplace_back(A);
         }
-    }
-    for(int t, i, k; cin >> t >> i >> k; ) {
-        i--;
-        int current = 0, blocknum = i / blocksize;
-        switch(t) {
-            case 1:
-                for(int j = blocknum * blocksize; j < min(n, (blocknum + 1) * blocksize); j++) {
-                    current ^= a[j];
-                    block[blocknum][current]--;
+        for(int i = 31; i > 0; i--) {
+            if(!bucket[i].empty()) {
+                auto front = bucket[i].front();
+                K = max(K, K ^ front);
+                for(int j = 1; j < bucket[i].size(); j++) {
+                    auto t = bucket[i][j] ^ front;
+                    bucket[length(t)].emplace_back(t);
                 }
-                a[i] = k;
-                current = 0;
-                for(int j = blocknum * blocksize; j < min(n, (blocknum + 1) * blocksize); j++) {
-                    current ^= a[j];
-                    block[blocknum][current]++;
-                }
-                xorr[blocknum] = current;
-                break;
-            case 2:
-                int result = 0;
-                for(int i = 0; i < blocknum; i++) {
-                    result += block[i][current ^ k];
-                    current ^= xorr[i];
-                }
-                for(int j = blocknum * blocksize; j <= i; j++) {
-                    current ^= a[j];
-                    if(current == k) {
-                        result++;
-                    }
-                }
-                cout << result << endl;
+            }
         }
+        cout << K << endl;
     }
     return 0;
 }
