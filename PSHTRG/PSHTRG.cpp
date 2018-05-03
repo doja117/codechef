@@ -52,7 +52,7 @@ int main() {
                 block[b] = cal(a, b * blocksize, min((b + 1) * blocksize, n));
                 break;
             case 2:
-                unsigned int result = 0, start = b / blocksize + 1, end = (c - 1) / blocksize;
+                unsigned int result = 0, start = b / blocksize + 1, end = c / blocksize;
                 vector<unsigned int> v;
                 if(end <= start) {
                     v = cal(a, b, c);
