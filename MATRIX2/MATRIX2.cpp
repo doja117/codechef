@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
@@ -19,10 +20,8 @@ int main() {
         result += dp[i];
     }
     for(int j = 1; j < m; j++) {
-        int count = matrix[n - 1][j];
-        dp[n - 1] = min(dp[n - 1] + 1, count);
-        result += dp[n - 1];
-        for(int i = n - 2; i >= 0; i--) {
+        int count = 0;
+        for(int i = n - 1; i >= 0; i--) {
             if(matrix[i][j]) {
                 count += 1;
             } else {
