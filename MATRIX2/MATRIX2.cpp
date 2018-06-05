@@ -14,24 +14,21 @@ int main() {
         }
     }
     long long result = 0;
-    dp[n - 1] = matrix[n - 1][0];
-    result += dp[n - 1];
-    for(int i = n - 2; i >= 0; i--) {
+    for(int i = n - 1; i >= 0; i--) {
         dp[i] = matrix[i][0];
         result += dp[i];
     }
     for(int j = 1; j < m; j++) {
-        int count[n];
-        count[n - 1] = matrix[n - 1][j];
-        dp[n - 1] = min(dp[n - 1] + 1, count[n - 1]);
+        int count = matrix[n - 1][j];
+        dp[n - 1] = min(dp[n - 1] + 1, count);
         result += dp[n - 1];
         for(int i = n - 2; i >= 0; i--) {
             if(matrix[i][j]) {
-                count[i] = count[i + 1] + 1;
+                count += 1;
             } else {
-                count[i] = 0;
+                count = 0;
             }
-            dp[i] = min(dp[i] + 1, count[i]);
+            dp[i] = min(dp[i] + 1, count);
             result += dp[i];
         }
     }
