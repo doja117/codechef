@@ -53,9 +53,9 @@ int main() {
     for(int i = 1; i <= n; i++) {
         add(bit, begin[i], skill[i]);
     }
-    for(string m; cin >> m; ) {
+    for(char c; cin >> c; ) {
         int s, x;
-        switch(m[0]) {
+        switch(c) {
             case 'U':
                 cin >> s >> x;
                 add(bit, begin[s], x - get(bit, begin[s]) + get(bit, begin[s] - 1));
