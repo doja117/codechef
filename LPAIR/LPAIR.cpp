@@ -18,7 +18,7 @@ int get(vector<int>& bit, int index) {
     return result;
 }
 
-void update(vector<int>& bit, int index, int val) {
+void add(vector<int>& bit, int index, int val) {
     while(index < bit.size()) {
         bit[index] += val;
         index += lowbit(index);
@@ -30,8 +30,7 @@ int main() {
     cin >> N;
     int A[N];
     map<int, int> map;
-    for(int i = 0; i < N; i++) {
-        int j;
+    for(int i = 0, j; i < N; i++) {
         cin >> j >> A[i];
         map[j] = A[i];
     }
@@ -41,8 +40,8 @@ int main() {
     }
     long long result = 0;
     vector<int> bit(N + 1, 0);
-        for(auto it = map.rbegin(); it != map.rend(); it++) {
-        update(bit, it->second, 1);
+    for(auto it = map.rbegin(); it != map.rend(); it++) {
+        add(bit, it->second, 1);
         result += get(bit, it->second - 1);
     }
     cout << result;
