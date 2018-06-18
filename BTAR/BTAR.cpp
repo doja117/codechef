@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+ 
 int main() {
     int T;
     cin >> T;
@@ -17,13 +17,9 @@ int main() {
             int result = min(mod[1], mod[3]);
             mod[1] -= result;
             mod[3] -= result;
-            if(mod[3] > 0) {
-                mod[1] = mod[3];
-            }
-            auto count = min(mod[2], mod[1] / 2);
-            result += min(count * 2 + (mod[1] - 2 * count) / 4 * 3 + (mod[2] - count) / 2, mod[2] / 2 + mod[1] / 4 * 3 + mod[2] % 2 * 2);
+            result += mod[2] / 2 + max(mod[1], mod[3]) / 4 * 3 + mod[2] % 2 * 2;
             cout << result;
         }
     }
     return 0;
-}
+} 
