@@ -6,7 +6,7 @@ int main() {
     int T;
     cin >> T;
     for(long long n, k, b; cin >> n >> k >> b; ) {
-        long long a[n], result = 0;
+        long long a[n], result = 1;
         for(long long i = 0; i < n; i++) {
             cin >> a[i];
         }
@@ -17,7 +17,7 @@ int main() {
                 result++;
             }
         }
-        cout << result + 1 << endl;
+        cout << result << endl;
     }
     return 0;
 }
