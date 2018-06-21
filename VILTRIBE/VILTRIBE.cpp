@@ -5,22 +5,15 @@ int main() {
     int T;
     cin >> T;
     for(string s; cin >> s; ) {
-        int result[2] = {};;
-        for(int i = 0, empty = 0, last = -1; i < s.size(); i++) {
-            if(s[i] == 'A') {
-                result[0]++;
-                if(last == 0) {
-                    result[0] += empty;
+        int result[2] = {};
+        for(int i = 0, empty = 0, last = '.'; i < s.size(); i++) {
+            if(s[i] == 'B' || s[i] == 'A') {
+                result[s[i] - 'A']++;
+                if(last == s[i]) {
+                    result[s[i] - 'A'] += empty;
                 }
                 empty = 0;
-                last = 0;
-            } else if(s[i] == 'B') {
-                result[1]++;
-                if(last == 1) {
-                    result[1] += empty;
-                }
-                empty = 0;
-                last = 1;
+                last = s[i];
             } else {
                 empty++;
             }
