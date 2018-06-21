@@ -1,29 +1,26 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 using namespace std;
-
+ 
 int main() {
     int T;
     cin >> T;
     for(int n, k; cin >> n >> k; ) {
-        vector<int> set[n];
+        int* set[n], size[n];
         for(int i = 0; i < n; i++) {
-            int size;
-            cin >> size;
-            for(int j = 0; j < size; j++) {
-                int t;
-                cin >> t;
-                set[i].emplace_back(t);
+            cin >> size[i];
+            set[i] = new int[size[i]];
+            for(int j = 0; j < size[i]; j++) {
+                cin >> set[i][j];
             }
-            sort(begin(set[i]), end(set[i]));
+            sort(set[i], set[i] + size[i]);
         }
         int result = 0;
         for(int i = 0; i < n; i++) {
             for(int j = i + 1; j < n; j++) {
-                auto current = set[i].size();
-                for(auto m : set[j]) {
-                    if(!binary_search(begin(set[i]), end(set[i]), m)) {
+                auto current = size[i];
+                for(int m = 0; m < size[j]; m++) {
+                    if(!binary_search(set[i], set[i] + size[i], set[j][m])) {
                         current++;
                     }
                 }
