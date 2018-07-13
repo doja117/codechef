@@ -18,7 +18,7 @@ int main() {
             cost[s1] = s3;
             path[s1] = s2;
         }
-		string start;
+        string start;
         for(auto it = parity.begin(); it != parity.end(); it++) {
             if(it->second == 1) {
                 start = it->first;
