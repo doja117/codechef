@@ -5,7 +5,6 @@ int main() {
     int t;
     cin >> t;
     for(string s; cin >> s; ) {
-        string result = "YES\n";
         int L = 0, T = 0, I = 0, M = 0, E = 0;
         for(auto c : s) {
             if(c == 'L') {
