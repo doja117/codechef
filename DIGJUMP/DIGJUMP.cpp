@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <set>
 using namespace std;
 
 int main() {
@@ -12,10 +11,9 @@ int main() {
         graph[i].emplace_back(i - 1);
         graph[i - 1].emplace_back(i);
     }
-    vector<bool> visited(s.size());
+    vector<bool> visited(s.size()), flag(10);
     visited[0] = true;
     queue<int> queue;
-    bool flag[10] = {};
     queue.emplace(0);
     int result = 0;
     do {
@@ -32,14 +30,13 @@ int main() {
                     queue.emplace(i);
                 }
             }
-            if(flag[s[front] - '0']) {
-                continue;
-            }
-            flag[s[front] - '0'] = true;
-            for(int i = 0; i < s.size(); i++) {
-                if(s[i] == s[front] && !visited[i]) {
-                    visited[i] = true;
-                    queue.emplace(i);
+            if(!flag[s[front] - '0']) {
+                flag[s[front] - '0'] = true;
+                for(int i = 0; i < s.size(); i++) {
+                    if(s[i] == s[front] && !visited[i]) {
+                        visited[i] = true;
+                        queue.emplace(i);
+                    }
                 }
             }
         }
