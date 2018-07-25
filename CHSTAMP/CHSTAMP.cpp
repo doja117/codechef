@@ -16,8 +16,8 @@ int main() {
         }
         vector<pair<int,int>> edge[SIZE];
         for(int t, a, b; m > 0; m--) {
-			cin >> t >> a >> b;
-			edge[t].emplace_back(a, b);
+            cin >> t >> a >> b;
+            edge[t].emplace_back(a, b);
         }
         int max_type[SIZE];
         for(int i = 0; i < SIZE; i++) {
