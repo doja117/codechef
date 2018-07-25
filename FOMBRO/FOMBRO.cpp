@@ -5,7 +5,7 @@ int main() {
     int T;
     cin >> T;
     for(long long n, m, q; cin >> n >> m >> q; ) {
-        long long dp[n], last = (n - 1) / 2 + 1, change[last + 1];
+        long long last = (n - 1) / 2 + 1, dp[last + 1], change[last + 1];
         dp[1] = 1;
         for(long long i = n; i > 1; i--) {
             dp[1] = dp[1] * i % m;
@@ -21,12 +21,9 @@ int main() {
         for(long long i = 2; i <= n / 2; i++) {
             dp[i] = dp[i - 1] * change[i] % m;
         }
-        for(long long i = n - 1; i > n / 2; i--) {
-            dp[i] = dp[n - i];
-        }
-        for(int r; q > 0; q--) {
+        for(long long r; q > 0; q--) {
             cin >> r;
-            cout << dp[r] << endl;
+            cout << dp[min(r, n - r)] << endl;
         }
     }
     return 0;
