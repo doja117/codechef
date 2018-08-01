@@ -9,6 +9,7 @@ int main() {
     a.push_back('0');
     a.append(b);
     temp[0] = 0;
+    temp[n - 1] = n;
     for(int i = 0; i < n; i++) {
         sa[i] = i;
         inverse[i] = a[i];
