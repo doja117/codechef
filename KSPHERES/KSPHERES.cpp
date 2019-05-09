@@ -33,11 +33,11 @@ int main() {
         }
     }
     for(auto i : count) {
-        vector<long long> j = {-i, 1};
+        vector<long long> j = {i, 1};
         polynomial = multiply(polynomial, j);
     }
     for(int i = polynomial.size() - 3; i >= 0; i--) {
-        cout << abs(polynomial[i]) << ' ';
+        cout << polynomial[i] << ' ';
     }
     for(int i = 0; i < c - polynomial.size() + 2; i++) {
         cout << 0 << ' ';
