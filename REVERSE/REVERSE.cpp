@@ -1,22 +1,12 @@
 #include <iostream>
 #include <set>
 #include <algorithm>
-#include <climits>
 #include <vector>
 using namespace std;
 
-int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<pair<int, int>> graph[n];
-    for(int x, y; cin >> x >> y; ) {
-        x--;
-        y--;
-        graph[x].emplace_back(y, 0);
-        graph[y].emplace_back(x, 1);
-    }
-    int distance[n];
-    fill(distance, distance + n, INT_MAX);
+int dijkstra(vector<pair<int, int>>* graph, int n) {
+    unsigned int distance[n];
+    fill(distance, distance + n, -1);
     set<pair<int, int>> set;
     set.emplace(0, 0);
     distance[0] = 0;
@@ -31,10 +21,17 @@ int main() {
             }
         }
     } while(!set.empty());
-    if(distance[n - 1] == INT_MAX) {
-        cout << -1;
-    } else {
-        cout << distance[n - 1];
+    return distance[n - 1];
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    vector<pair<int, int>> graph[n];
+    for(int x, y; cin >> x >> y; ) {
+        graph[x - 1].emplace_back(y - 1, 0);
+        graph[y - 1].emplace_back(x - 1, 1);
     }
+    cout << dijkstra(graph, n);
     return 0;
 }
