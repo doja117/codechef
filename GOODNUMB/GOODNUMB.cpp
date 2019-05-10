@@ -1,6 +1,5 @@
 #include <iostream>
 #include <map>
-#include <algorithm>
 using namespace std;
 
 const int SIZE = 100001, PRIMESIZE = 304129;
@@ -8,8 +7,7 @@ const int SIZE = 100001, PRIMESIZE = 304129;
 int main() {
     int T;
     cin >> T;
-    int minprime[PRIMESIZE];
-    fill(minprime, minprime + PRIMESIZE, 0);
+    int minprime[PRIMESIZE] = {};
     for(int i = 2; i < PRIMESIZE; i++) {
         if(minprime[i] == 0) {
             for(int j = i; j < PRIMESIZE; j += i) {
@@ -42,11 +40,7 @@ int main() {
                 good = true;
             }
         }
-        if(good) {
-            prefix[i] = prefix[i - 1] + current;
-        } else {
-            prefix[i] = prefix[i - 1];
-        }
+        prefix[i] = prefix[i - 1] + current * good;
     }
     for(int L, R; cin >> L >> R; ) {
         cout << prefix[R] - prefix[L - 1] << endl;
