@@ -12,7 +12,7 @@ int main() {
         int* h[n];
         vector<bool> visited[n];
         for(int i = 0; i < n; i++) {
-        	h[i] = new int[m];
+            h[i] = new int[m];
             visited[i].resize(m);
             for(int j = 0; j < m; j++) {
                 cin >> h[i][j];
