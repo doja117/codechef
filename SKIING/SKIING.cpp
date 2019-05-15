@@ -4,18 +4,16 @@
 #include <algorithm>
 using namespace std;
 
-int** h;
-
 int main() {
     int T;
     cin >> T;
     for(int n, m; cin >> n >> m; ) {
         pair<int, int> a[n * m];
-        h = new int*[n];
+        int* h[n];
         vector<bool> visited[n];
         for(int i = 0; i < n; i++) {
-            h[i] = new int[m];
-            visited[i] = vector<bool>(m);
+        	h[i] = new int[m];
+            visited[i].resize(m);
             for(int j = 0; j < m; j++) {
                 cin >> h[i][j];
                 a[i * m + j] = {i, j};
