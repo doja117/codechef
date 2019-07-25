@@ -1,6 +1,31 @@
 #include <iostream>
-#include <climits>
 using namespace std;
+
+bool kmp(const string& text, const string& pattern) {
+    int lps[pattern.size()];
+    lps[0] = -1;
+    for (int i = 1, j = -1; i < pattern.size(); i++) {
+        while (j >= 0 && pattern[i - 1] != pattern[j]) {
+            j = lps[j];
+        }
+        j++;
+        if (pattern[i] == pattern[j]) {
+            lps[i] = lps[j];
+        } else {
+            lps[i] = j;
+        }
+    }
+    for (int i = 0, j = 0; i < text.size(); i++) {
+        while (j >= 0 && text[i] != pattern[j]) {
+            j = lps[j];
+        }
+        j++;
+        if (j == pattern.size()) {
+            return true;
+        }
+    }
+    return false;
+}
 
 int main() {
     int T;
@@ -15,7 +40,7 @@ int main() {
                 auto substr = w[0].substr(i, j);
                 bool stem = true;
                 for(int i = 1; i < N; i++) {
-                    if(w[i].find(substr) == string::npos) {
+                    if(!kmp(w[i], substr)) {
                         stem = false;
                         break;
                     }
