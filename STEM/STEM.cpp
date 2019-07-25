@@ -16,7 +16,7 @@ bool kmp(const string& text, const string& pattern) {
         }
     }
     for (int i = 0, j = 0; i < text.size(); i++) {
-        if (j >= 0 && text[i] != pattern[j]) {
+        while (j >= 0 && text[i] != pattern[j]) {
             j = lps[j];
         }
         j++;
