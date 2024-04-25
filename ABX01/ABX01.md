@@ -84,7 +84,7 @@ As New Year is approaching, Salik is studying functions in order to sharpen his 
 
 It's guaranteed that this process correctly defines the function **F**.
 
-Since this problem was pretty straightforward, he invented a new problem: Given two integers **A** and **N**, compute **F**(**AN**). Can you help him solve this task?
+Since this problem was pretty straightforward, he invented a new problem: Given two integers **A** and **N**, compute **F**(**A^N**). Can you help him solve this task?
 
 ### Input
 
